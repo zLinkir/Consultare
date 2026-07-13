@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: digital-bank-api
+  messages:
+    basename: messages/messages
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/FREE
+    username: digital_bank
+    password: oracle
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: DIGITAL_BANK

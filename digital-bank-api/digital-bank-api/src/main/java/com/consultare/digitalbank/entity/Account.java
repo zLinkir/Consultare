@@ -1,5 +1,6 @@
 package com.consultare.digitalbank.entity;
 
+import com.consultare.digitalbank.entity.customer.Customer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

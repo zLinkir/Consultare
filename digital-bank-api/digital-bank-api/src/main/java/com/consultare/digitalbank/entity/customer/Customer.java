@@ -1,9 +1,6 @@
-package com.consultare.digitalbank.entity;
+package com.consultare.digitalbank.entity.customer;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,8 @@ import java.time.LocalDate;
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
+    @SequenceGenerator(name = "customer_seq", sequenceName = "CUSTOMER_SEQ", allocationSize = 1)
     @Column(name = "CUSTOMER_ID", nullable = false)
     private Long id;
 

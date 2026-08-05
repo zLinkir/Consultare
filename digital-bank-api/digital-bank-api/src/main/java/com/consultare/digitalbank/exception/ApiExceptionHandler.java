@@ -1,5 +1,6 @@
 package com.consultare.digitalbank.exception;
 
+import com.consultare.digitalbank.exception.customer.CustomerAlreadyExistsException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -50,6 +51,32 @@ public class ApiExceptionHandler {
                 errors
         );
         return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(CustomerAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException ex, WebRequest request) {
+        Map<String, String> fields = new HashMap<>();
+        fields.put(
+                ex.getField(),
+                messageSource.getMessage(
+                        ex.getMessage(),
+                        null,
+                        LocaleContextHolder.getLocale()
+                )
+        );
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                "CUSTOMER_ALREADY_EXISTS",
+                messageSource.getMessage(
+                        ex.getMessage(),
+                        null,
+                        LocaleContextHolder.getLocale()),
+                request.getDescription(false).replace("uri=", ""),
+                fields
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }

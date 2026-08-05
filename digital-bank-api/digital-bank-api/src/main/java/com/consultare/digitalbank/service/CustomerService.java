@@ -3,6 +3,7 @@ package com.consultare.digitalbank.service;
 import com.consultare.digitalbank.dto.customer.CustomerRequestDTO;
 import com.consultare.digitalbank.dto.customer.CustomerResponseDTO;
 import com.consultare.digitalbank.entity.customer.Customer;
+import com.consultare.digitalbank.exception.customer.CustomerAlreadyExistsException;
 import com.consultare.digitalbank.mapper.CustomerMapper;
 import com.consultare.digitalbank.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,9 @@ public class CustomerService {
     private final CustomerMapper mapper;
 
     public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO) {
+        if (repository.existsByCpf(customerRequestDTO.getCpf())) {
+            throw new CustomerAlreadyExistsException();
+        }
         Customer customer = mapper.toEntity(customerRequestDTO);
         Customer savedCustomer = repository.save(customer);
         return mapper.toResponse(savedCustomer);

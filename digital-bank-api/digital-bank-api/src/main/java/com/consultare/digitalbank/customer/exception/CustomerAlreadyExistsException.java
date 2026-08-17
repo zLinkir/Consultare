@@ -1,4 +1,4 @@
-package com.consultare.digitalbank.exception.customer;
+package com.consultare.digitalbank.customer.exception;
 
 public class CustomerAlreadyExistsException extends RuntimeException {
 

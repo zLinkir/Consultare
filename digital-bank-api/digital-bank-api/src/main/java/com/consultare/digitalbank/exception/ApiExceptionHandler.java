@@ -1,6 +1,7 @@
 package com.consultare.digitalbank.exception;
 
-import com.consultare.digitalbank.exception.customer.CustomerAlreadyExistsException;
+import com.consultare.digitalbank.customer.exception.CustomerAlreadyExistsException;
+import com.consultare.digitalbank.customer.exception.CustomerNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -77,6 +78,31 @@ public class ApiExceptionHandler {
                 fields
         );
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCustomerNotFoundException(CustomerNotFoundException ex, WebRequest request) {
+        Map<String, String> fields = new HashMap<>();
+        fields.put(
+                ex.getField(),
+                messageSource.getMessage(
+                        ex.getMessage(),
+                        null,
+                        LocaleContextHolder.getLocale()
+                )
+        );
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                "CUSTOMER_NOT_FOUND",
+                messageSource.getMessage(
+                        ex.getMessage(),
+                        null,
+                        LocaleContextHolder.getLocale()),
+                request.getDescription(false).replace("uri=", ""),
+                fields
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
 }

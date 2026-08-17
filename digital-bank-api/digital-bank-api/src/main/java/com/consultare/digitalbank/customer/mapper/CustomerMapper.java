@@ -1,8 +1,8 @@
-package com.consultare.digitalbank.mapper;
+package com.consultare.digitalbank.customer.mapper;
 
-import com.consultare.digitalbank.dto.customer.CustomerRequestDTO;
-import com.consultare.digitalbank.dto.customer.CustomerResponseDTO;
-import com.consultare.digitalbank.entity.customer.Customer;
+import com.consultare.digitalbank.customer.dto.CustomerRequestDTO;
+import com.consultare.digitalbank.customer.dto.CustomerResponseDTO;
+import com.consultare.digitalbank.customer.entity.Customer;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package com.consultare.digitalbank.service;
+package com.consultare.digitalbank.account.service;
 
 import org.springframework.stereotype.Service;
 

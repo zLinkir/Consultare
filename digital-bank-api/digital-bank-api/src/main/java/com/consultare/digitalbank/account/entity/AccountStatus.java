@@ -1,4 +1,4 @@
-package com.consultare.digitalbank.entity;
+package com.consultare.digitalbank.account.entity;
 
 public enum AccountStatus
     {

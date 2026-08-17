@@ -1,4 +1,4 @@
-package com.consultare.digitalbank.dto.customer;
+package com.consultare.digitalbank.customer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

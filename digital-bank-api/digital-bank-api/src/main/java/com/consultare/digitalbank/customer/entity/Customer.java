@@ -1,4 +1,4 @@
-package com.consultare.digitalbank.entity.customer;
+package com.consultare.digitalbank.customer.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

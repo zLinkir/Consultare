@@ -1,6 +1,6 @@
 package com.consultare.digitalbank.config;
 
-import com.consultare.digitalbank.repository.AccountRepository;
+import com.consultare.digitalbank.account.repository.AccountRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

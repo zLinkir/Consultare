@@ -41,7 +41,7 @@ public class CustomerController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<CustomerResponseDTO> updateCustomer(
             @PathVariable Long id,
             @RequestBody @Valid CustomerUpdateRequestDTO request) {

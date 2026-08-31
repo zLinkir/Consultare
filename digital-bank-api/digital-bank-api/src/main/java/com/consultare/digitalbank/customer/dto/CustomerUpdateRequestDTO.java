@@ -1,5 +1,6 @@
 package com.consultare.digitalbank.customer.dto;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,4 @@ public class CustomerUpdateRequestDTO {
     private String cpf;
     @Past(message = "{customer.birthDate.invalid}")
     private LocalDate birthDate;
-
 }

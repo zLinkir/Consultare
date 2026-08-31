@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,4 +27,12 @@ public class CustomerRequestDTO {
     @NotNull(message = "{customer.birthDate.required}")
     @Past(message = "{customer.birthDate.invalid}")
     private LocalDate birthDate;
+
+    @NotBlank(message = "{customer.password.required}")
+    @Size(min = 8, max = 64, message = "{customer.password.size}")
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z\\d]).+$",
+            message = "{customer.password.weak}"
+    )
+    private String password;
 }

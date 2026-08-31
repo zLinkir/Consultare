@@ -2,6 +2,7 @@ package com.consultare.digitalbank.exception;
 
 import com.consultare.digitalbank.customer.exception.CustomerAlreadyExistsException;
 import com.consultare.digitalbank.customer.exception.CustomerNotFoundException;
+import com.consultare.digitalbank.auth.exception.InvalidCredentialsException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -36,8 +37,7 @@ public class ApiExceptionHandler {
 
             String messageKey = error.getDefaultMessage().replace("{", "").replace("}", "");
 
-            errors.put(field, messageKey);
-
+            errors.put(field,messageKey);
         }
 
         ErrorResponse errorResponse = new ErrorResponse(
@@ -103,6 +103,22 @@ public class ApiExceptionHandler {
                 fields
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCredentialsException(InvalidCredentialsException ex, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.UNAUTHORIZED.value(),
+                "INVALID_CREDENTIALS",
+                messageSource.getMessage(
+                        ex.getMessage(),
+                        null,
+                        LocaleContextHolder.getLocale()),
+                request.getDescription(false).replace("uri=", ""),
+                Map.of()
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
 
 }

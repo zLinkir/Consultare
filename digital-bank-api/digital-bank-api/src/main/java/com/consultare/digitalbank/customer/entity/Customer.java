@@ -30,4 +30,7 @@ public class Customer {
 
     @Column(name = "BIRTH_DATE", nullable = false)
     private LocalDate birthDate;
+
+    @Column(name = "PASSWORD_HASH", nullable = false)
+    private String passwordHash;
 }

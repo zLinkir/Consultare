@@ -10,6 +10,7 @@ import com.consultare.digitalbank.customer.mapper.CustomerMapper;
 import com.consultare.digitalbank.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,11 +23,14 @@ public class CustomerService {
 
     private final CustomerMapper mapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO) {
         if (repository.existsByCpf(customerRequestDTO.getCpf())) {
             throw new CustomerAlreadyExistsException();
         }
         Customer customer = mapper.toEntity(customerRequestDTO);
+        customer.setPasswordHash(passwordEncoder.encode(customerRequestDTO.getPassword()));
         Customer savedCustomer = repository.save(customer);
         return mapper.toResponse(savedCustomer);
     }
